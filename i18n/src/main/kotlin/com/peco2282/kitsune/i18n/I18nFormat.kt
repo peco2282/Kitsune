@@ -42,7 +42,7 @@ class I18nFormat internal constructor(
       return I18nFormat(this)
     }
     private fun checkString(str: String) {
-      require(str.isBlankOrEmpty()) { "String must not be blank or empty" }
+      require(str.isNotBlank() && str.isNotEmpty()) { "String must not be blank or empty" }
     }
   }
 }
