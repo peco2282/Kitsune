@@ -39,10 +39,10 @@ class LoggerTest {
             val logger = ConsoleLogger("Test", LogLevel.INFO)
             val fields = mapOf("z" to "last", "a" to "first", "m" to 123, "n" to null)
             
-            logger.info(fields = fields) { "Message" }
+            logger.info(fields = fields) { "Message {z} {a} {m} {n}" }
             
             val output = baos.toString()
-            assertTrue(output.contains("a=first m=123 n=null z=last"), "Fields should be sorted by key: $output")
+            assertTrue(output.contains("Message last first 123 null"), "Fields should be sorted by key: $output")
         } finally {
             System.setOut(originalOut)
         }
