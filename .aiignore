@@ -1,0 +1,14 @@
+# AI Ignore file for Kitsune project
+# Ignore temporary and build artifacts that provide no semantic value to AI models
+.gradle/
+build/
+.idea/
+*.log
+*.tmp
+*.bak
+local.properties
+secrets.properties
+gradlew
+gradlew.bat
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
