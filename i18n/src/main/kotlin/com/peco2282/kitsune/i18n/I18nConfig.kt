@@ -12,10 +12,12 @@ import java.io.File
 class I18nConfig(
   val resourceDir: File,
   val extention: String = "properties",
-  val format: I18nFormat
+  format: I18nFormat.Builder.() -> Unit
 ) {
+  private val _format: I18nFormat by lazy { I18nFormat.of().apply(format).build() }
+
   /**
    * キーをプレースホルダ形式に変換します。
    */
-  fun replaceKey(key: String) = format.replacerLeft + key + format.replacerRight
+  fun replaceKey(key: String) = _format.replacerLeft + key + _format.replacerRight
 }
