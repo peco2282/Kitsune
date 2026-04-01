@@ -9,9 +9,11 @@ import java.util.concurrent.ConcurrentHashMap
 class SimpleI18n(
   val config: I18nConfig = I18nConfig(
     File("."),
-    "properties",
-    I18nFormat.of().build()
-  )
+    "properties"
+  ) {
+    replacerLeft = "%"
+    replacerRight = "%"
+  }
 ) : Translation {
   private val translations = ConcurrentHashMap<String, MutableMap<String, String>>()
 
