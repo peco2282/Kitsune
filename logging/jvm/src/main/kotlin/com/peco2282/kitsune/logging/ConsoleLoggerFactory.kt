@@ -18,13 +18,16 @@ class ConsoleLogger(
 
     val out = if (level == LogLevel.WARN || level == LogLevel.ERROR) System.err else System.out
     val timestamp = LocalDateTime.now().format(formatter)
-    val msg = message()
+    var msg = message()
 
-    val fieldsString = if (fields.isNotEmpty()) {
-      fields.toSortedMap().entries.joinToString(" ") { "${it.key}=${it.value ?: "null"}" }.let { " $it" }
-    } else ""
+    var tmpMsg = msg
 
-    val line = "$timestamp $level $tag - $msg$fieldsString"
+    msg = if (fields.isNotEmpty()) {
+      fields.forEach { (key, value) -> tmpMsg = tmpMsg.replace("{$key}", value.toString()) }
+      tmpMsg
+    } else tmpMsg
+
+    val line = "$timestamp $level $tag - $msg"
     out.println(line)
 
     throwable?.printStackTrace(out)
