@@ -34,8 +34,8 @@ class I18nTest {
         val enProps = File(tempDir, "en.properties")
         enProps.writeText("hello=Hello\n")
 
-        val config = I18nConfig(tempDir, "properties", i18nFormat { replacer("%") })
-        val i18n = I18n(config, listOf("ja", "en"))
+        val config = I18nConfig(tempDir, "properties") { replacer("%") }
+      val i18n = I18n(config, listOf("ja", "en"))
 
         val jaHello = i18n.translate("ja", "hello", emptyMap())
         println("[DEBUG_LOG] ja hello: $jaHello")
